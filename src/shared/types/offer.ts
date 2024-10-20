@@ -1,5 +1,5 @@
 
-export enum facilities {
+export enum facilitiesEnum {
   Breakfast = 'Breakfast',
   AirConditioning = 'Air conditioning',
   LaptopFriendlyWorkspace = 'Laptop friendly workspace',
@@ -8,15 +8,15 @@ export enum facilities {
   Towels ='Towels',
   Fridge = 'Fridge',
 }
-export type Facilities = keyof facilities;
+export type Facilities = keyof facilitiesEnum;
 
-export enum housingType {
+export enum housingTypes {
   Apartment = 'apartment',
   House = 'house',
   Room = 'room',
   Hotel = 'hotel',
 }
-export type HousingType = keyof housingType;
+export type HousingType = keyof housingTypes;
 
 export enum citys {
   Paris = 'Paris',
@@ -85,6 +85,8 @@ export type Comment = {
    */
   author: Author;
 }
+
+export type Coordinates = { latitude: number; longitude: number };
 
 export type Offer = {
   /**
@@ -186,5 +188,5 @@ export type Offer = {
    * Координаты предложения для аренды
    * Координаты представлены широтой и долготой
    */
-  coordinates: { latitude: number; longitude: number };
+  coordinates: Coordinates;
 };
