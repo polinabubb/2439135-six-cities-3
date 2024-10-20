@@ -23,7 +23,6 @@ export class TSVOfferGenerator implements OfferGenerator {
     const price = generateRandomValue(500, 15000).toString();
     const allFacilities = [facilitiesEnum.AirConditioning, facilitiesEnum.BabySeat,facilitiesEnum.Breakfast, facilitiesEnum.Fridge, facilitiesEnum.LaptopFriendlyWorkspace, facilitiesEnum.Towels, facilitiesEnum.Washer];
     const facilities = getRandomItems(allFacilities).join(', ');
-
     const authorName = getRandomItem<string>(this.mockData.authorName);
     const authorEmail = getRandomItem<string>(this.mockData.authorEmail);
     const authorPassword = getRandomItem<string>(this.mockData.authorPassword);
@@ -31,7 +30,9 @@ export class TSVOfferGenerator implements OfferGenerator {
     const authorAvatar = getRandomItem<string>(this.mockData.authorAvatar);
     const author = [authorName, authorEmail, authorPassword, authorType, authorAvatar].join(', ');
     const commentsCount = generateRandomValue(1, 12).toString();
-    const coordinates = citysCoordinates.get(city as citys);
+    const coordinatesObj = citysCoordinates.get(city as citys);
+
+    const coordinates = `${coordinatesObj?.latitude}, ${coordinatesObj?.longitude}`;
 
     const createdDate = dayjs()
       .subtract(generateRandomValue(1, 7), 'day')

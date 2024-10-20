@@ -21,7 +21,7 @@ export function createOffer(offerData: string): Offer {
   } as Author;
   const [latitude, longitude] = coordinates.split(', ');
 
-  const coordinatesObj = {latitude: Number.parseInt(latitude, 10), longitude: Number.parseInt(longitude, 10)} as Coordinates;
+  const coordinatesObj = {latitude: +latitude, longitude: +longitude} as Coordinates;
 
   return {
     name,

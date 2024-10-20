@@ -6,12 +6,13 @@ import { TSVFileWriter } from '../../shared/libs/file-writer/index.js';
 import { TSVOfferGenerator } from '../../shared/libs/offer-generator/index.js';
 
 export class GenerateCommand implements Command {
-  private initialData: MockServerData;
 
+  private initialData: MockServerData;
   private async load(url: string) {
     try {
       this.initialData = await got.get(url).json();
     } catch {
+      console.info('Error initialData');
       throw new Error(`Can't load data from ${url}`);
     }
   }
@@ -31,7 +32,6 @@ export class GenerateCommand implements Command {
   public async execute(...parameters: string[]): Promise<void> {
     const [count, filepath, url] = parameters;
     const offerCount = Number.parseInt(count, 10);
-
     try {
       await this.load(url);
       await this.write(filepath, offerCount);
