@@ -1,6 +1,6 @@
 import {citys} from './shared/types/offer.js';
 
-const citysCoordinates: Map<string, { latitude: number; longitude: number }> =
+export const citysCoordinates: Map<string, { latitude: number; longitude: number }> =
   new Map(
     Object.entries({
       [citys.Paris]: { latitude: 48.85661, longitude: 2.351499 },

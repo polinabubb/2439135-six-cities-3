@@ -1,0 +1,60 @@
+{
+  "api": {
+    "name": [
+      "Чулан под лестницей",
+      "Отель в спортивном стадионе",
+      "Ходячий замок",
+      "Детская комната в ТЦ",
+      "Дом-музей"
+    ],
+    "description": [
+      "Небольшая уютная комната, в которой вас никто не потревожит, а вы в свою очередь здорово отдохнете",
+      "Вы, наверное, уже видели номера в нашем отеле с выходом на стадион, посмотрите свой любимый матч с наивысшим комфортом",
+      "Тот самый известный замок, в котором вас тепло встретит Кальцифер",
+      "Не знаете куда деть своего ребенка, пока ходите за покупками? Наша новая десткая комната с мягкими лабиринтами и бассейном из шариков вам точно подойдет",
+      "Очень интересный дом еще и музей. Перед вами будут лучшие экспонанты 21 века и безграничное количество времени"
+    ],
+    "preview": [
+      "domMuseumParis.png",
+      "hodyachiiZamok.png",
+      "childrenHouse.png",
+      "miniRoom.png",
+      "sportRoom.png"
+    ],
+    "photos": [
+      ["windowView.png","bedroom.png","toilet.png"],
+      ["guestroom.png","kitchen.png","garden.png"],
+      ["gym.png","washroom.png","childrenroom.png"],
+      ["street.png","room.png","windowView.png"],
+      ["kitchen.png","bedroom.png","room.png"]
+    ],
+    "authorName": [
+      "Марина Антоновна",
+      "Родомир Павлович",
+      "Александр Сергеевич",
+      "Суаньцзы",
+      "Констанция Маргаритовна"
+    ],
+    "authorEmail": [
+      "marina1288@gmail.com",
+      "olegPetrov@gmail.com",
+      "terminator@gmail.com",
+      "mikhail@gmail.com",
+      "lady@gmail.com"
+    ],
+    "authorPassword": [
+      "qazwsx123",
+      "12345679",
+      "Ig7_9&.Gvs7",
+      "bobik48",
+      "marina1998"
+    ],
+    "authorAvatar": [
+      "marina1288.png",
+      "olegPetrov.png",
+      "myPhoto.png",
+      "mikhail.png",
+      "lady123.png"
+    ]
+  }
+}
