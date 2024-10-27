@@ -1,6 +1,6 @@
 import { Command } from './command.interface.js';
 import { TSVFileReader } from '../../shared/libs/file-reader/index.js';
-import chalk from 'chalk';
+import {errorStyle} from '../../const.js';
 import { createOffer, getErrorMessage } from '../../shared/helpers/index.js';
 
 export class ImportCommand implements Command {
@@ -20,7 +20,6 @@ export class ImportCommand implements Command {
   public async execute(...parameters: string[]): Promise<void> {
     const [filename] = parameters;
     const fileReader = new TSVFileReader(filename.trim());
-    const errorStyle = chalk.red;
     fileReader.on('line', this.onImportedLine);
     fileReader.on('end', this.onCompleteImport);
     try {
