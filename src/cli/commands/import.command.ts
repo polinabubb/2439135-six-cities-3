@@ -9,7 +9,7 @@ import { ConsoleLogger } from '../../shared/libs/logger/console.logger.js';
 import { DefaultAuthorService, AuthorModel } from '../../shared/modules/author/index.js';
 import { DEFAULT_DB_PORT, DEFAULT_AUTHOR_PASSWORD } from './command.constant.js';
 import { Offer } from '../../shared/types/index.js';
-import TsvFileReader from "../../shared/libs/file-reader/tsv-file-reader.js";
+import TsvFileReader from '../../shared/libs/file-reader/tsv-file-reader.js';
 
 
 export class ImportCommand implements Command {
