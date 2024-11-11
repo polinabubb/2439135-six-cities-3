@@ -8,7 +8,7 @@ import {errorStyle, pinkStyle} from '../../const.js';
 
 export class GenerateCommand implements Command {
 
-  private initialData: MockServerData;
+  private initialData: MockServerData | null = null;
   private async load(url: string) {
     try {
       this.initialData = await got.get(url).json();
@@ -19,10 +19,12 @@ export class GenerateCommand implements Command {
   }
 
   private async write(filepath: string, offerCount: number) {
-    const tsvOfferGenerator = new TSVOfferGenerator(this.initialData);
-    const tsvFileWriter = new TSVFileWriter(filepath);
-    for (let i = 0; i < offerCount; i++) {
-      await tsvFileWriter.write(tsvOfferGenerator.generate());
+    if (this.initialData !== null) {
+      const tsvOfferGenerator = new TSVOfferGenerator(this.initialData);
+      const tsvFileWriter = new TSVFileWriter(filepath);
+      for (let i = 0; i < offerCount; i++) {
+        await tsvFileWriter.write(tsvOfferGenerator.generate());
+      }
     }
   }
 
