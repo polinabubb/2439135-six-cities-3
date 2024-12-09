@@ -13,7 +13,6 @@ _`.editorconfig`, `.gitattributes`, `.gitignore`._
 
 npm run mock:server
 
-
 ### 2. Импорт данных
 
 node ./dist/main.cli.js -- --import ./mocks/test-data.tsv
