@@ -15,7 +15,7 @@ npm run mock:server
 
 ### 2. Генерация новых данных
 
-npm run ts ./src/main.cli.ts -- --generate 100 ./mocks/test-data.tsv http://localhost:3123/api
+node ./dist/main.cli.js --generate 100 ./mocks/test-data.tsv http://localhost:3123/api
 
 ### 3. Импорт данных
 
