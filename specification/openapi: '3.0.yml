@@ -1,12 +1,11 @@
-openapi: 3.1.0
+openapi: '3.0.3'
 info:
   title: API сервер для демо-проекта «6 городов».
-  description: |-
-    * Список ресурсов сервера «6 городов».
+  description: Список ресурсов сервера «6 городов».
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-  version: 2.0.0
+  version: '1.0'
 tags:
   - name: offers
     description: Действия с объявлениями.
@@ -14,7 +13,8 @@ tags:
     description: Действия с комментариями.
   - name: users
     description: Действия с пользователем.
-
+servers:
+  - url: https://api.server.test/v1
 paths:
   /offers:
     post:
@@ -195,11 +195,11 @@ paths:
           - offers
         summary: Получить список premium предложений
         description: Список возвращаемых предложений отсортирован по дате публикации (по убыванию). Ресурс доступен авторизованным и анонимным клиентам.
-      responses:
-        "200":
-          description: Список премиальных предложений.
-        "400":
-          description: Неверно указан город.
+        responses:
+          "200":
+            description: Список премиальных предложений.
+          "400":
+            description: Неверно указан город.
 
   /offers/favorite:
       get:
@@ -289,7 +289,7 @@ components:
           example: Очень выгодное предложение
         
         date:
-          type: date
+          type: string
           example: '2024-12-28T14:09:21.261Z'
 
         city:
@@ -362,7 +362,7 @@ components:
           example: Очень хороший отель
 
         date:
-          type: date
+          type: string
           example: 2024-12-28T14:09:21.261Z'
 
         rating:
