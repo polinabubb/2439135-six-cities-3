@@ -24,7 +24,6 @@ export class TSVOfferGenerator implements OfferGenerator {
     const allFacilities = [facilitiesEnum.AirConditioning, facilitiesEnum.BabySeat,facilitiesEnum.Breakfast, facilitiesEnum.Fridge, facilitiesEnum.LaptopFriendlyWorkspace, facilitiesEnum.Towels, facilitiesEnum.Washer];
     const facilities = getRandomItems(allFacilities).join(', ');
     const author = getRandomItem<Author>(this.mockData.author);
-   // const author = [authorName, authorEmail, authorPassword, authorType, authorAvatar].join(', ');
     const commentsCount = generateRandomValue(1, 12).toString();
     const coordinatesObj = citysCoordinates.get(city as citys);
 
