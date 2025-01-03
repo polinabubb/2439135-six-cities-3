@@ -5,8 +5,8 @@ import {Component} from '../shared/types/index.js';
 
 import {DatabaseClient} from '../shared/libs/database-client/index.js';
 import {getMongoURI} from '../shared/helpers/index.js';
-import { Controller, ExceptionFilter } from '../shared/libs/rest/index.js';
 import express, { Express } from 'express';
+import { Controller, ExceptionFilter } from '../shared/libs/rest/index.js';
 
 @injectable()
 export class RestApplication {
@@ -16,9 +16,9 @@ export class RestApplication {
     @inject(Component.Logger) private readonly logger: Logger,
     @inject(Component.Config) private readonly config: Config<RestSchema>,
     @inject(Component.DatabaseClient) private readonly databaseClient: DatabaseClient,
-  
     @inject(Component.ExceptionFilter) private readonly appExceptionFilter: ExceptionFilter,
     @inject(Component.AuthorController) private readonly authorController: Controller,
+    @inject(Component.OfferController) private readonly offerController: Controller,
   ) {
     this.server = express();
   }
@@ -42,6 +42,7 @@ export class RestApplication {
 
   private async _initControllers() {
     this.server.use('/users', this.authorController.router);
+    this.server.use('/offers', this.offerController.router);
   }
 
   private async _initMiddleware() {
