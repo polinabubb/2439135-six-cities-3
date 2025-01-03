@@ -19,4 +19,5 @@ export interface OfferService {
   getFavoriteOffersByAuthor(authorId: string): Promise<DocumentType<OfferEntity>[] | null>;
   changeFavoriteByIdToTrue(offerId: string, authorId: string): Promise<DocumentType<OfferEntity> | null>;
   changeFavoriteByIdToFalse(offerId: string, authorId: string): Promise<DocumentType<OfferEntity> | null>;
+  changeRatingByOfferId(currRating: number, offerId: string): Promise<number>;
 }
