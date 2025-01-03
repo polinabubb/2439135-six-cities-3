@@ -7,5 +7,5 @@ export interface AuthorService {
   create(dto: CreateAuthorDto, salt: string): Promise<DocumentType<AuthorEntity>>;
   findByEmail(email: string): Promise<DocumentType<AuthorEntity> | null>;
   findOrCreate(dto: CreateAuthorDto, salt: string): Promise<DocumentType<AuthorEntity>>;
-  updateById(userId: string, dto: UpdateAuthorDto): Promise<DocumentType<AuthorEntity> | null>;
+  updateById(authorId: string, dto: UpdateAuthorDto): Promise<DocumentType<AuthorEntity> | null>;
 }
