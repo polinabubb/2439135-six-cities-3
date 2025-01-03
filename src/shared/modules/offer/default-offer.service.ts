@@ -93,13 +93,23 @@ export class DefaultOfferService implements OfferService {
       .exec();
   }
 
-  public async changeFavoriteByIdToTrue(offerId: string, authorId: string): Promise<DocumentType<OfferEntity> | null> {
+  public async changeFavoriteByIdToTrue(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
-    .findByIdAndUpdate(offerId, {_id: authorId, isFavorite: true}).exec();
+    .findByIdAndUpdate(offerId, {isFavorite: true}).exec();
   }
 
-  public async changeFavoriteByIdToFalse(offerId: string, authorId: string): Promise<DocumentType<OfferEntity> | null> {
+  public async changeFavoriteByIdToFalse(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
-    .findByIdAndUpdate(offerId, {_id: authorId, isFavorite: false}).exec();
+    .findByIdAndUpdate(offerId, {isFavorite: false}).exec();
+  }
+
+  public async changeRatingByOfferId(currRating: number, offerId: string):Promise<number> {
+    const prevSumm = 1;//await this.offerModel.findById(offerId).exec().then(data => data?.commentsCount);
+    const updatedRating = (prevSumm + currRating) / 2;
+    await this.offerModel
+    .findByIdAndUpdate(offerId, {rating: updatedRating}, {new: true})
+    .exec();
+
+    return updatedRating;
   }
 }
