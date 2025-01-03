@@ -38,9 +38,9 @@ export class DefaultAuthorService implements AuthorService {
     return this.create(dto, salt);
   }
 
-  public async updateById(userId: string, dto: UpdateAuthorDto): Promise<DocumentType<AuthorEntity> | null> {
+  public async updateById(authorId: string, dto: UpdateAuthorDto): Promise<DocumentType<AuthorEntity> | null> {
     return this.authorModel
-      .findByIdAndUpdate(userId, dto, { new: true })
+      .findByIdAndUpdate(authorId, dto, { new: true })
       .exec();
   }
 }
