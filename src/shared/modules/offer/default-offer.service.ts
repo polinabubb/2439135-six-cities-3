@@ -7,6 +7,8 @@ import { OfferEntity } from './offer.entity.js';
 import { CreateOfferDto } from './dto/create-offer.dto.js';
 import { UpdateOfferDto } from './dto/update-offer.dto.js';
 //import { DEFAULT_OFFER_COUNT } from './offer.constant.js';
+//import { HttpError } from '../../libs/rest/index.js';
+//import { StatusCodes } from 'http-status-codes';
 
 @injectable()
 export class DefaultOfferService implements OfferService {
@@ -25,14 +27,14 @@ export class DefaultOfferService implements OfferService {
   public async findById(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
       .findById(offerId)
-      .populate(['authorId'])
+      .populate('authorId')
       .exec();
   }
 
   public async find(): Promise<DocumentType<OfferEntity>[]> {
     return this.offerModel
       .find()
-      .populate(['authorId'])
+      .populate('authorId')
       .exec();
   }
 
@@ -45,7 +47,7 @@ export class DefaultOfferService implements OfferService {
   public async updateById(offerId: string, dto: UpdateOfferDto): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
       .findByIdAndUpdate(offerId, dto, {new: true})
-      .populate(['authorId'])
+      .populate('authorId')
       .exec();
   }
 
@@ -66,7 +68,7 @@ export class DefaultOfferService implements OfferService {
       .find()
       .sort({ createdAt: SortType.Down })
       .limit(count)
-      .populate(['authorId'])
+      .populate('authorId')
       .exec();
   }
 
@@ -75,40 +77,40 @@ export class DefaultOfferService implements OfferService {
       .find()
       .sort({ commentCount: SortType.Down })
       .limit(count)
-      .populate(['authorId'])
+      .populate('authorId')
       .exec();
   }
 
   public async getPremiumOffersByCity(city: string): Promise<DocumentType<OfferEntity>[] | null> {
     return this.offerModel
-      .find({city: city, premium: true})
-      .populate(['authorId'])
+      .find({city: city, isPremium: true})
+      .populate('authorId')
       .exec();
   }
 
   public async getFavoriteOffersByAuthor(authorId: string): Promise<DocumentType<OfferEntity>[] | null> {
     return this.offerModel
       .find({authorId: authorId, isFavorite:true})
-      .populate(['authorId'])
+      .populate('authorId')
       .exec();
   }
 
   public async changeFavoriteByIdToTrue(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
-    .findByIdAndUpdate(offerId, {isFavorite: true}).exec();
+      .findByIdAndUpdate(offerId, {isFavorite: true}).exec();
   }
 
   public async changeFavoriteByIdToFalse(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
-    .findByIdAndUpdate(offerId, {isFavorite: false}).exec();
+      .findByIdAndUpdate(offerId, {isFavorite: false}).exec();
   }
 
   public async changeRatingByOfferId(currRating: number, offerId: string):Promise<number> {
     const prevSumm = 1;//await this.offerModel.findById(offerId).exec().then(data => data?.commentsCount);
     const updatedRating = (prevSumm + currRating) / 2;
     await this.offerModel
-    .findByIdAndUpdate(offerId, {rating: updatedRating}, {new: true})
-    .exec();
+      .findByIdAndUpdate(offerId, {rating: updatedRating}, {new: true})
+      .exec();
 
     return updatedRating;
   }

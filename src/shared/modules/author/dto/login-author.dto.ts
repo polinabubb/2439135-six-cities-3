@@ -1,4 +1,10 @@
+import {CreateLoginAuthorMessage} from './login-author.messages.js';
+import {IsEmail, IsString} from 'class-validator';
+
 export class LoginAuthorDto {
-    public email: string;
-    public password: string;
-  }
+  @IsEmail({}, {message: CreateLoginAuthorMessage.email.invalidFormat})
+  public email: string;
+
+  @IsString({message: CreateLoginAuthorMessage.password.invalidFormat})
+  public password: string;
+}

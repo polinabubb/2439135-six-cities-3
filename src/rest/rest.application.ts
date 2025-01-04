@@ -19,6 +19,7 @@ export class RestApplication {
     @inject(Component.ExceptionFilter) private readonly appExceptionFilter: ExceptionFilter,
     @inject(Component.AuthorController) private readonly authorController: Controller,
     @inject(Component.OfferController) private readonly offerController: Controller,
+    @inject(Component.CommentController) private readonly commentController: Controller
   ) {
     this.server = express();
   }
@@ -43,10 +44,16 @@ export class RestApplication {
   private async _initControllers() {
     this.server.use('/users', this.authorController.router);
     this.server.use('/offers', this.offerController.router);
+    this.server.use('/comments', this.commentController.router);
   }
 
   private async _initMiddleware() {
     this.server.use(express.json());
+
+    this.server.use(
+      '/upload',
+      express.static(this.config.get('UPLOAD_DIRECTORY'))
+    );
   }
 
   private async _initExceptionFilters() {
