@@ -1,9 +1,9 @@
-import {authorTypeEnum} from "../../../types/index.js";
+//import {authorTypeEnum} from '../../../types/index.js';
 
 export type TokenPayload = {
   email: string;
-  name: string;
-  authorType:authorTypeEnum;
+  //name: string;
+  //authorType:authorTypeEnum;
   //avatar: string;
   id: string;
 };

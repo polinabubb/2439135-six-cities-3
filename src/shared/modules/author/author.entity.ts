@@ -18,7 +18,7 @@ export class AuthorEntity extends defaultClasses.TimeStamps implements Author {
   @prop({ required: false, default: '' })
   public name: string;
 
-  @prop({ required: true, default: '' })
+  @prop({ required: false, default: '' })
   public avatar?: string;
 
   @prop({ required: true, enum: authorTypeEnum })

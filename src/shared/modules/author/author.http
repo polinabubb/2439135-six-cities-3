@@ -47,6 +47,6 @@ GET http://localhost:4000/upload/wolf2.jpg  HTTP/1.1
 
 ## Проверить токен пользователя
 GET http://localhost:4000/users/login HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InBvbGlua2FtYWxpbmthQGdtYWlsLmNvbSIsIm5hbWUiOiIiLCJhdXRob3JUeXBlIjoicHJvIiwiaWQiOiI2Nzc4ODBhYWJmODJlMTIwMWU3MThjYzUiLCJpYXQiOjE3MzYwMTgxMTgsImV4cCI6MTczNjE5MDkxOH0.uV1GdFzMmudZVLINHohhtXuLjhuGQv3Sd9CjADrLiF0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InBvbGlua2FtYWxpbmthQGdtYWlsLmNvbSIsImlkIjoiNjc3ODgwYWFiZjgyZTEyMDFlNzE4Y2M1IiwiaWF0IjoxNzM2MDIwODY2LCJleHAiOjE3MzYxOTM2NjZ9.G_9MM6Wu7B1OTwTuA0GSsV9FPW8S7qL1uFWRoeulRMc
 
 ###

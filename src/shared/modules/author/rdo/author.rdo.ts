@@ -13,4 +13,7 @@ export class AuthorRdo {
 
   @Expose()
   public authorType: authorTypeEnum.Default | authorTypeEnum.Pro;
+
+  @Expose()
+  public id: string;
 }

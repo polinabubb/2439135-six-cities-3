@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import {
   BaseController,
   HttpError,
-  HttpMethod, UploadFileMiddleware,
+  HttpMethod,  UploadFileMiddleware,
   ValidateDtoMiddleware,
   ValidateObjectIdMiddleware,
 } from '../../libs/rest/index.js';
@@ -19,7 +19,7 @@ import { LoginAuthorRequest } from './login-author-request.type.js';
 import { CreateAuthorDto } from './dto/create-author.dto.js';
 import { AuthService } from '../auth/index.js';
 import { LoggedAuthorRdo } from './rdo/logged-author.rdo.js';
-import {LoginAuthorDto} from "./dto/login-author.dto.js";
+
 
 @injectable()
 export class AuthorController extends BaseController {
@@ -42,7 +42,7 @@ export class AuthorController extends BaseController {
       path: '/login',
       method: HttpMethod.Post,
       handler: this.login,
-      middlewares: [new ValidateDtoMiddleware(LoginAuthorDto)]
+      //middlewares: [new ValidateDtoMiddleware(LoginAuthorDto)]
     });
     this.addRoute({
       path: '/login',
@@ -58,7 +58,6 @@ export class AuthorController extends BaseController {
         new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'avatar'),
       ]
     });
-    //this.addRoute({ path: '/logout'});
   }
 
   public async create(
@@ -85,7 +84,7 @@ export class AuthorController extends BaseController {
   ): Promise<void> {
     const author = await this.authService.verify(body);
     const token = await this.authService.authenticate(author);
-    const responseData = fillDTO(LoggedAuthorRdo, author);
+    const responseData = fillDTO(LoggedAuthorRdo, {email: author.email, token});
     this.ok(res, Object.assign(responseData, { token }));
   }
 
@@ -95,9 +94,8 @@ export class AuthorController extends BaseController {
     });
   }
 
-  public async checkAuthenticate({ tokenPayload: { email }}: Request, res: Response) {
-    const foundedAuthor = await this.authorService.findByEmail(email);
-
+  public async checkAuthenticate({ tokenPayload }: Request, res: Response) {
+    const foundedAuthor = await this.authorService.findByEmail(tokenPayload.email);
     if (! foundedAuthor) {
       throw new HttpError(
         StatusCodes.UNAUTHORIZED,
@@ -105,7 +103,6 @@ export class AuthorController extends BaseController {
         'AuthorController'
       );
     }
-
     this.ok(res, fillDTO(LoggedAuthorRdo, foundedAuthor));
   }
 }

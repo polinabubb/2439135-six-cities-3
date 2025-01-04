@@ -6,15 +6,13 @@ import {
   DocumentExistsMiddleware,
   PrivateRouteMiddleware,
   HttpMethod, ValidateDtoMiddleware, ValidateObjectIdMiddleware
-} from '../../libs/rest/index.js';//RequestBody, RequestParams
+} from '../../libs/rest/index.js';
 import {Logger} from '../../libs/logger/index.js';
 import {Component} from '../../types/index.js';
 import {OfferService} from './offer-service.interface.js';
-//import { Config, RestSchema } from '../../libs/config/index.js';
 import {fillDTO} from '../../helpers/index.js';
 import {OfferRdo} from './rdo/offer.rdo.js';
 import { CreateOfferRequest } from './create-offer-request.type.js';
-//import { AuthorService } from '../author/author-service.interface.js';
 import { CommentService } from '../comment/comment-service.interface.js';
 import { UpdateOfferDto } from './dto/update-offer.dto.js';
 import {CreateOfferDto} from './dto/create-offer.dto.js';
@@ -26,9 +24,7 @@ export class OfferController extends BaseController {
   constructor(
     @inject(Component.Logger) protected readonly logger: Logger,
     @inject(Component.OfferService) private readonly offerService: OfferService,
-    // @inject(Component.AuthorService) private readonly authorService: AuthorService,
-     @inject(Component.CommentService) private readonly commentService: CommentService,
-    //@inject(Component.Config) private readonly configService: Config<RestSchema>,
+    @inject(Component.CommentService) private readonly commentService: CommentService,
   ) {
     super(logger);
     this.logger.info('Register routes for OfferController…');
