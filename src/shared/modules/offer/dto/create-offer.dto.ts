@@ -6,7 +6,7 @@ import {
   IsDateString,
   IsEnum,
   IsInt,
-  IsMongoId, IsNumber,
+  IsNumber,
   Max,
   MaxLength,
   Min,
@@ -68,11 +68,10 @@ export class CreateOfferDto {
   @IsEnum(housingTypes, {each: true, message: CreateOfferValidationMessage.facilities.invalid})
   public facilities!: Facilities[];
 
-  @IsMongoId({message: CreateOfferValidationMessage.authorId.invalidId})
-  public authorId!: string;
-
   @IsInt()
   public commentsCount!: number;
+
+  public authorId: string;
 
   @MinLength(10, {message: CreateOfferValidationMessage.coordinates.minLength})
   @MaxLength(100, {message: CreateOfferValidationMessage.coordinates.maxLength})

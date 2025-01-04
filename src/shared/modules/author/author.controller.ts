@@ -17,7 +17,9 @@ import { fillDTO } from '../../helpers/index.js';
 import { AuthorRdo } from './rdo/author.rdo.js';
 import { LoginAuthorRequest } from './login-author-request.type.js';
 import { CreateAuthorDto } from './dto/create-author.dto.js';
-import { LoginAuthorDto } from './dto/login-author.dto.js';
+import { AuthService } from '../auth/index.js';
+import { LoggedAuthorRdo } from './rdo/logged-author.rdo.js';
+import {LoginAuthorDto} from "./dto/login-author.dto.js";
 
 @injectable()
 export class AuthorController extends BaseController {
@@ -25,7 +27,8 @@ export class AuthorController extends BaseController {
     @inject(Component.Logger) protected readonly logger: Logger,
     @inject(Component.AuthorService) private readonly authorService: AuthorService,
     @inject(Component.Config) private readonly configService: Config<RestSchema>,
-  ) {
+    @inject(Component.AuthService) private readonly authService: AuthService,
+    ) {
     super(logger);
     this.logger.info('Register routes for AuthorController');
 
@@ -42,11 +45,16 @@ export class AuthorController extends BaseController {
       middlewares: [new ValidateDtoMiddleware(LoginAuthorDto)]
     });
     this.addRoute({
-      path: '/:userId/avatar',
+      path: '/login',
+      method: HttpMethod.Get,
+      handler: this.checkAuthenticate,
+    });
+    this.addRoute({
+      path: '/:authorId/avatar',
       method: HttpMethod.Post,
       handler: this.uploadAvatar,
       middlewares: [
-        new ValidateObjectIdMiddleware('userId'),
+        new ValidateObjectIdMiddleware('authorId'),
         new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'avatar'),
       ]
     });
@@ -73,28 +81,31 @@ export class AuthorController extends BaseController {
 
   public async login(
     { body }: LoginAuthorRequest,
-    _res: Response,
+    res: Response,
   ): Promise<void> {
-    const existsAuthor = await this.authorService.findByEmail(body.email);
-
-    if (! existsAuthor) {
-      throw new HttpError(
-        StatusCodes.UNAUTHORIZED,
-        `Author with email ${body.email} not found.`,
-        'AuthorController',
-      );
-    }
-
-    throw new HttpError(
-      StatusCodes.NOT_IMPLEMENTED,
-      'Not implemented',
-      'AuthorController',
-    );
+    const author = await this.authService.verify(body);
+    const token = await this.authService.authenticate(author);
+    const responseData = fillDTO(LoggedAuthorRdo, author);
+    this.ok(res, Object.assign(responseData, { token }));
   }
 
   public async uploadAvatar(req: Request, res: Response) {
     this.created(res, {
       filepath: req.file?.path
     });
+  }
+
+  public async checkAuthenticate({ tokenPayload: { email }}: Request, res: Response) {
+    const foundedAuthor = await this.authorService.findByEmail(email);
+
+    if (! foundedAuthor) {
+      throw new HttpError(
+        StatusCodes.UNAUTHORIZED,
+        'Unauthorized',
+        'AuthorController'
+      );
+    }
+
+    this.ok(res, fillDTO(LoggedAuthorRdo, foundedAuthor));
   }
 }

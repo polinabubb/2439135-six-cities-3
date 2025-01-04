@@ -43,4 +43,10 @@ Content-Type: image/png
 ## Пример с картинкой
 GET http://localhost:4000/upload/wolf2.jpg  HTTP/1.1
 
-##
+###
+
+## Проверить токен пользователя
+GET http://localhost:4000/users/login HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InBvbGlua2FtYWxpbmthQGdtYWlsLmNvbSIsIm5hbWUiOiIiLCJhdXRob3JUeXBlIjoicHJvIiwiaWQiOiI2Nzc4ODBhYWJmODJlMTIwMWU3MThjYzUiLCJpYXQiOjE3MzYwMTgxMTgsImV4cCI6MTczNjE5MDkxOH0.uV1GdFzMmudZVLINHohhtXuLjhuGQv3Sd9CjADrLiF0
+
+###
