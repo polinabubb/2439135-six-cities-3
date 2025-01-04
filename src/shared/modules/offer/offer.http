@@ -4,30 +4,110 @@
 POST http://localhost:4000/offers HTTP/1.1
 Content-Type: application/json
 
-{ 
-
+{
+  "name": "лучший отель",
+  "description": "самый самый лучший отель",
+  "date": "2024-10-26T11:39:50.417Z",
+  "city": "Dusseldorf",
+  "preview": "childrenHouse.png",
+  "photos": [
+    "gym.png",
+    "room.png",
+    "kitchen.png"
+  ],
+  "isPremium": true,
+  "isFavorite": true,
+  "rating": 5,
+  "housingType": "room",
+  "roomsCount": 11,
+  "guestsCount": 2,
+  "price": 12278,
+  "coordinates": "51.225402, 6.776314",
+  "facilities": [
+    "Washer"
+  ],
+  "commentsCount": 6
 }
 
 ###
 
 ## Удалить предложение
 
-DELETE http://localhost:4000/offers HTTP/1.1
+DELETE http://localhost:4000/offers/6775c919c97b242a5201cedf HTTP/1.1
+Content-Type: application/json
+
+###
+
+## Изменять предложение
+
+PUT http://localhost:4000/offers/6775c919c97b242a5201cedf HTTP/1.1
 Content-Type: application/json
 
 {
- 
+  "name": "лучший отель",
+  "description": "самый самый лучший отель",
+  "date": "2024-10-26T11:39:50.417Z",
+  "city": "Dusseldorf",
+  "preview": "childrenHouse.png",
+  "photos": [
+    "gym.png",
+    "room.png",
+    "kitchen.png"
+  ],
+  "isPremium": true,
+  "isFavorite": true,
+  "rating": 5,
+  "housingType": "room",
+  "roomsCount": 11,
+  "guestsCount": 2,
+  "price": 12278,
+  "coordinates": "51.225402, 6.776314",
+  "facilities": [
+    "Washer"
+  ],
+  "commentsCount": 6
 }
 
-
+###
 
 ## Получить список предложений
 
 GET http://localhost:4000/offers HTTP/1.1
 Content-Type: application/json
 
-{
+###
 
-}
+## Получить предложение
+
+GET http://localhost:4000/offers/6775c919c97b242a5201cedf HTTP/1.1
+Content-Type: application/json
+
+###
+
+## Получить избранные предложения
+
+GET http://localhost:4000/offers/favorite HTTP/1.1
+Content-Type: application/json
+
+###
+
+## Получить премиум предложения по городу
+
+GET http://localhost:4000/offers/premium/Dusseldorf HTTP/1.1
+Content-Type: application/json
+
+###
+
+## добавить в избранное
+
+POST http://localhost:4000/offers/favorite/6775c919c97b242a5201cedf HTTP/1.1
+Content-Type: application/json
+
+###
+
+## удалить из избранного
+
+DELETE http://localhost:4000/offers/favorite/6775c919c97b242a5201cedf HTTP/1.1
+Content-Type: application/json
 
 ###
